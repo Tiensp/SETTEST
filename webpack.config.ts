@@ -46,6 +46,9 @@ function createServerConfig(): Configuration {
         },
 
         plugins: [
+          new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ["!**"]
+          })
         ]
 
     }
@@ -94,9 +97,11 @@ function createClientConfig(): Configuration {
             ]
         },
 
+        devServer: {
+          historyApiFallback: true,
+        },
+
         plugins: [
-            new CleanWebpackPlugin(),
-            
             new HtmlWebpackPlugin({
                 template: "./public/index.html"
             }),

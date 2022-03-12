@@ -29,11 +29,15 @@ namespace PrerenderData {
    */    
   export function readFromDom<T>(disposeData?: boolean): T | null {
       
-      if(typeof window == "undefined" || !window.prerenderData) return null;
+      if(typeof window == "undefined" || !window.prerenderData) {
+        return null;
+      }
       
       const data = window.prerenderData as T;
       
-      if(disposeData) window.prerenderData = null;
+      if(disposeData) {
+        window.prerenderData = null;
+      }
       
       return data;
   }

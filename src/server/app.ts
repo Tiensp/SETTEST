@@ -4,5 +4,5 @@ import { PORT } from "./configuration";
 const server = createServer();
 
 server.listen(PORT, () => {
-    console.log(`Server listening to port ${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}/`);
 });

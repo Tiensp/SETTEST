@@ -12,7 +12,9 @@ const ServerDataProvider = ServerDataContext.Provider;
  */
 const useServerData = <T>() => {
     const contextData = useContext(ServerDataContext);
-    if (contextData) return contextData as T;
+    if (contextData) {
+        return contextData as T;
+    }
     
     const prerenderData =  PrerenderData.readFromDom<T>(true);
     return prerenderData;
