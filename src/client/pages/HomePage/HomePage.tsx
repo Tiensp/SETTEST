@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './style.scss';
 
 /**
  * The home page. Nothing fancy here.
@@ -7,7 +8,7 @@ import React from 'react'
  */
 export default function HomePage() {
     return (
-        <div>
+        <div className='home__container'>
             <h1>Hello world</h1>
         </div>
     )
