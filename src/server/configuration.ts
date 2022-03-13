@@ -1,7 +1,7 @@
 import path from "path";
 
 
-export const PORT = process.env.PORT ?? 8080;
+export const PORT = process.env.PORT ?? 3000;
     
 export const PUBLIC_DIR_PATH = process.env.PUBLIC_DIR_PATH ?? path.join(__dirname, "build");
     

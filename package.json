@@ -5,7 +5,7 @@
   "main": "./build/app.js",
   "scripts": {
     "test": "npx jest",
-    "start:client": "npx webpack serve --config-name client --open --hot --port 3000",
+    "start:client": "npx webpack serve --config-name client --open --hot --port 8080",
     "start:server": "npx concurrently \"npx webpack -w\" \"npx nodemon ./build/app.js\"",
     "build": "webpack --mode production",
     "lint": "eslint . --ext .ts",
