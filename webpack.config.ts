@@ -42,6 +42,11 @@ function createServerConfig(): Configuration {
                 },
                 use: 'ts-loader',
               },
+
+              {
+                test: /\.s?css$/,
+                use: ['css-loader', 'sass-loader']
+              },
             ]
         },
 
@@ -75,13 +80,27 @@ function createClientConfig(): Configuration {
 
         mode: 'development',
 
+        // optimization: {
+        //   splitChunks: {
+        //       cacheGroups: {
+        //           style: {
+        //               name: 'style',
+        //               test: /style\.s?css$/,
+        //               chunks: 'all',
+        //               enforce: true,
+        //           },
+        //       },
+        //   },
+        // },
+
         entry: {
-          index: "./src/client/index.tsx"
+          index: "./src/client/index.tsx",
+          css: "./src/client/css.ts"
         },
 
         output: {
           path: path.join(__dirname, "/build"),
-          filename: "bundle.js",
+          filename: "[name].js",
         },
 
         module: {
@@ -94,6 +113,11 @@ function createClientConfig(): Configuration {
                 },
                 use: 'ts-loader',
               },
+
+              {
+                test: /\.s?css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+              },
             ]
         },
 
@@ -103,10 +127,13 @@ function createClientConfig(): Configuration {
 
         plugins: [
             new HtmlWebpackPlugin({
-                template: "./public/index.html"
+                template: "./public/index.html",
+                ignoreOrder: true
             }),
 
-            new MiniCssExtractPlugin(),
+            new MiniCssExtractPlugin({
+              filename: "[name].css",
+            })
         ].filter(Boolean),
 
     };

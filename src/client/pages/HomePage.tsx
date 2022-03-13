@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.scss';
 
 /**
  * The home page. Nothing fancy here.

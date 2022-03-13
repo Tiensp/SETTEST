@@ -42,7 +42,7 @@ export async function renderReactAsync(url: string, prerenderedObject?: unknown)
 
 
 function buildHtml(templateHtml: string, reactHtml: string, styleTags: string, dataTag: string) {
-    
+
   const pattern = /(?<head><head>)|(?<root><div\sid="root">)/g;
   
   return templateHtml.replace(pattern, (match, ...params: any[]) => {
@@ -50,9 +50,23 @@ function buildHtml(templateHtml: string, reactHtml: string, styleTags: string, d
 
       if (groups.head) return groups.head + styleTags;
       if (groups.root) return dataTag + groups.root + reactHtml;
-
+      
       return match;
   });
+  // const html = `
+  // <html>
+  //   <head>
+  //     <link rel="stylesheet" href="../../build/styles.css">
+  //   </head>
+  //   <body>
+  //     <div id='app'>${reactHtml}</div>
+  //     <script>
+  //       window.prerenderData = ${dataTag}
+  //     </script>
+  //     <script src="bundle.js"></script>
+  //   </body>
+  // </html>
+  // `;
 
 }
 

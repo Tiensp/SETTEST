@@ -4,6 +4,7 @@ import { SERVER_URL } from "./constants";
 import HomePage from "./pages/HomePage";
 import UserPage from "./pages/UserPage";
 import { ServerDataProvider } from "./serverData";
+import './style.scss'
 
 interface Props {
   /** Data used in the react prerender process. Use only in the server side. */

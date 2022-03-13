@@ -23,6 +23,8 @@ export function createServer() {
         index: false // The static middleware don't serve index.html. The ssr content won't be serverd otherwise.
     }));
 
+    server.use(express.static('build'));
+
     useRouting(server);
 
     // renders the react app. The corresponding route will be handled by react router
