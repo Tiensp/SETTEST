@@ -8,7 +8,7 @@ import './style.scss';
  */
 export default function HomePage() {
     return (
-        <div>
+        <div className='home__container'>
             <h1>Hello world</h1>
         </div>
     )

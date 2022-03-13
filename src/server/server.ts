@@ -1,19 +1,20 @@
 import express from "express";
-import { errorMiddleware } from "./middleware/errorMiddleware";
-import { reactMiddleware } from "./middleware/reactMiddleware";
-import { useRouting } from "./middleware/routing";
+import errorMiddleware from "./middleware/errorMiddleware";
+import reactMiddleware from "./middleware/reactMiddleware";
+import useRouting from "./middleware/routing";
 import { PUBLIC_DIR_PATH } from "./configuration";
+
 const cors = require('cors');
 
 const corsOptions ={
     origin:'http://localhost:3000', 
-    credentials:true,            //access-control-allow-credentials:true
+    credentials:true,            // access-control-allow-credentials:true
     optionSuccessStatus:200
 }
 
 // Split the express app definition to make its easier to test.
 
-export function createServer() {
+export default function createServer() {
     
     const server = express();
 

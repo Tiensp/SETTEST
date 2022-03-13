@@ -1,4 +1,4 @@
-import { createServer } from "./server";
+import createServer from "./server";
 import { PORT } from "./configuration";
 
 const server = createServer();

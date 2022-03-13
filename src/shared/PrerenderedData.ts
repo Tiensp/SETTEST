@@ -1,4 +1,5 @@
 declare global {
+  // eslint-disable-next-line no-unused-vars
   interface Window {
       prerenderData: unknown;
   }
@@ -29,13 +30,13 @@ namespace PrerenderData {
    */    
   export function readFromDom<T>(disposeData?: boolean): T | null {
       
-      if(typeof window == "undefined" || !window.prerenderData) {
+      if (typeof window === "undefined" || !window.prerenderData) {
         return null;
       }
       
       const data = window.prerenderData as T;
       
-      if(disposeData) {
+      if (disposeData) {
         window.prerenderData = null;
       }
       

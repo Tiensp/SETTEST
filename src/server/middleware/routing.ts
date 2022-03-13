@@ -1,9 +1,9 @@
 import { Express } from "express";
-import { renderReactAsync } from "../ssr/renderReactAsync";
+import renderReactAsync from "../ssr/renderReactAsync";
 import { UserModel } from "../../shared/models/user.model";
 
 /** Defines the server routings. */
-export function useRouting(app: Express) {
+export default function useRouting(app: Express) {
 
   // HomePage Route
   app.get("/", async (req, res) => {
@@ -13,8 +13,7 @@ export function useRouting(app: Express) {
         return res.status(200).contentType("text/html").send(html);
     }
     catch (error) {
-      console.log(error);
-        return res.status(500).send("Internal server error");
+      return res.status(500).send("Internal server error");
     }
 
   });
@@ -33,13 +32,12 @@ export function useRouting(app: Express) {
       return res.status(200).contentType("text/html").send(html);
     }
     catch (error) {
-      console.log(error);
-        return res.status(500).send("Internal server error");
+      return res.status(500).send("Internal server error");
     }
 
   });
 
-  app.get('*', function(req, res){
+  app.get('*', (req, res)=> {
     res.status(404).send('Page Not Found');
   });
 }

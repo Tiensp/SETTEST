@@ -1,8 +1,9 @@
-import { DefinePlugin, Configuration } from "webpack";
+import { Configuration } from 'webpack';
 import "webpack-dev-server";
 import path from "path";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function createServerConfig(): Configuration {
@@ -61,17 +62,6 @@ function createServerConfig(): Configuration {
 
 function createClientConfig(): Configuration {
 
-    const babelConfig = {
-        presets: [
-            "@babel/preset-env",
-            "@babel/preset-react",
-            "@babel/preset-typescript"
-        ],
-        plugins: [
-            "@babel/plugin-transform-runtime"
-        ].filter(Boolean)
-    }
-
     return {
 
         name: "client",
@@ -79,19 +69,6 @@ function createClientConfig(): Configuration {
         target: "web",
 
         mode: 'development',
-
-        // optimization: {
-        //   splitChunks: {
-        //       cacheGroups: {
-        //           style: {
-        //               name: 'style',
-        //               test: /style\.s?css$/,
-        //               chunks: 'all',
-        //               enforce: true,
-        //           },
-        //       },
-        //   },
-        // },
 
         entry: {
           index: "./src/client/index.tsx",
@@ -121,10 +98,6 @@ function createClientConfig(): Configuration {
             ]
         },
 
-        devServer: {
-          historyApiFallback: true,
-        },
-
         plugins: [
             new HtmlWebpackPlugin({
                 template: "./public/index.html",
@@ -140,7 +113,7 @@ function createClientConfig(): Configuration {
 
 } // end client configuration
 
-export default function () {
+export default function fn() {
 
   const clientConfig = createClientConfig();
   const serverConfig = createServerConfig();
