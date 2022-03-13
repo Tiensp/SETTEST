@@ -1,6 +1,7 @@
 import React from 'react'
 import { useServerData } from '../../serverData';
 import { UserModel } from '../../../shared/models/user.model';
+import './style.scss';
 
 /**
  * The user page. Example for state management.
