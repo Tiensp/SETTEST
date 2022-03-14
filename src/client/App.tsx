@@ -8,7 +8,7 @@ import './style.scss'
 
 interface Props {
   /** Data used in the react prerender process. Use only in the server side. */
-  serverData?: unknown;
+  serverData?: unknown; // Use unknown type because serverData can recieved any type of data from server.
 }
 
 /** The root react component for both client side rendering and server side rendering */

@@ -1,13 +1,27 @@
-/* eslint-disable no-unused-vars */
 enum ButtonType {
-  Number,
-  Operation
+	Numerical,
+	Operation,
 }
 
 enum ButtonColor {
-  Default,
-  Brown,
-  Orange
+	Default,
+	Brown,
+	Orange,
 }
 
-export { ButtonType, ButtonColor }
+enum InputType {
+	Numerical,
+	Operation
+}
+
+enum OperatorType {
+	Add = 'add',
+	Substract = 'substract',
+	Multiply = 'multiply',
+	Divide = 'divide',
+	Modulo = 'modulo',
+	PlusMinus = 'plusminus', 
+	Equals = 'equals'
+}
+
+export { ButtonType, ButtonColor, InputType, OperatorType }

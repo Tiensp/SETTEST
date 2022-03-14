@@ -1,35 +1,49 @@
-import React from 'react'
-import { ButtonColor } from '../../constants/enums'
+import React, { useState } from 'react'
+import { ButtonColor, InputType, OperatorType } from '../../constants/enums'
+import CalculatorLogic, { CalculatorInput } from '../../modules/calculatorLogic'
 import ActionBar from '../ActionBar/ActionBar'
 import Button from '../Button/Button'
-import Display from '../Display/DIsplay'
 
 export default function Calculator() {
+	const [ inputs, setInputs ] = useState<Array<CalculatorInput>>([]);
+	const state = CalculatorLogic.getState(inputs);
+
+	const appendInput = (input: CalculatorInput): void => {
+		setInputs((prev) => [...prev, input]);
+	}
+
+	const handleNumerical = (value: number) => () => {
+		setInputs((prev) => [...prev, { type: InputType.Numerical, value}])
+	}
+
+	const handleOperator = (operator: OperatorType) => () =>
+		appendInput({type: InputType.Operation, operator});
+
 	return (
 		<div className='calculator'>
 			<div className='calculator__wrapper'>
 				<ActionBar />
 				<div className='grid'>
-					<Display />
-					<Button label='AC' color={ButtonColor.Brown} />
-					<Button label='+/-' color={ButtonColor.Brown} />
-					<Button label='%' color={ButtonColor.Brown} />
-					<Button label='÷' color={ButtonColor.Orange} />
-					<Button label='7' color={ButtonColor.Default} />
-					<Button label='8' color={ButtonColor.Default} />
-					<Button label='9' color={ButtonColor.Default} />
-					<Button label='x' color={ButtonColor.Orange} />
-					<Button label='4' color={ButtonColor.Default} />
-					<Button label='5' color={ButtonColor.Default} />
-					<Button label='6' color={ButtonColor.Default} />
-					<Button label='-' color={ButtonColor.Orange} />
-					<Button label='1' color={ButtonColor.Default} />
-					<Button label='2' color={ButtonColor.Default} />
-					<Button label='3' color={ButtonColor.Default} />
-					<Button label='+' color={ButtonColor.Orange} />
-					<Button label='0' isLarger color={ButtonColor.Default} />
-					<Button label=',' color={ButtonColor.Default} />
-					<Button label='=' color={ButtonColor.Orange} />
+					<div className='display'>{state.displayValue}</div>
+					<Button label='AC' color={ButtonColor.Brown} onClick={handleNumerical(0)} />
+					<Button label='+/-' color={ButtonColor.Brown} onClick={handleOperator(OperatorType.PlusMinus)} />
+					<Button label='%' color={ButtonColor.Brown} onClick={handleOperator(OperatorType.Modulo)} />
+					<Button label='÷' color={ButtonColor.Orange} onClick={handleOperator(OperatorType.Divide)} />
+					<Button label='7' color={ButtonColor.Default} onClick={handleNumerical(7)} />
+					<Button label='8' color={ButtonColor.Default} onClick={handleNumerical(8)} />
+					<Button label='9' color={ButtonColor.Default} onClick={handleNumerical(9)} />
+					<Button label='x' color={ButtonColor.Orange} onClick={handleOperator(OperatorType.Multiply)} />
+					<Button label='4' color={ButtonColor.Default} onClick={handleNumerical(4)} />
+					<Button label='5' color={ButtonColor.Default} onClick={handleNumerical(5)} />
+					<Button label='6' color={ButtonColor.Default} onClick={handleNumerical(6)} />
+					<Button label='-' color={ButtonColor.Orange} onClick={handleOperator(OperatorType.Substract)} />
+					<Button label='1' color={ButtonColor.Default} onClick={handleNumerical(1)} />
+					<Button label='2' color={ButtonColor.Default} onClick={handleNumerical(2)} />
+					<Button label='3' color={ButtonColor.Default} onClick={handleNumerical(3)} />
+					<Button label='+' color={ButtonColor.Orange} onClick={handleOperator(OperatorType.Add)} />
+					<Button label='0' isLarger color={ButtonColor.Default} onClick={handleNumerical(0)} />
+					<Button label=',' color={ButtonColor.Default} onClick={handleNumerical(0)} />
+					<Button label='=' color={ButtonColor.Orange} onClick={handleOperator(OperatorType.Equals)} />
 				</div>
 			</div>
 		</div>
