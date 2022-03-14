@@ -1,13 +1,26 @@
-* {
-  background-color: rgb(165, 245, 245);
+body {
+  margin: 0;
 }
 
 .sidebar {
+  background-color: rgb(65, 65, 77);
   font-size: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 50px;
+  z-index: 1;
 }
 
-a+a {
+a {
   margin-left: 20px;
+  color: white;
+
+  &:visited {
+    color: white;
+  }
+
+  &:hover {
+    color: rgb(226, 65, 65);
+  }
 }

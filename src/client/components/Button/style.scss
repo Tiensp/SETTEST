@@ -1,0 +1,31 @@
+.button {
+  background-color: rgb(132,125,125);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 30px;
+  font-weight: 500;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(235,235,235);
+
+  &:hover {
+    background-color: rgb(175, 175, 175);
+  }
+
+  &:active {
+    background-color: rgb(99, 99, 99);
+  }
+}
+
+.button--large {
+  grid-column: span 2;
+}
+
+.button--brown {
+  background-color: rgb(107,99,100);
+}
+
+.button--orange {
+  background-color: rgb(253,158,43);
+}
