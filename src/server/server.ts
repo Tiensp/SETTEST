@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser";
 import errorMiddleware from "./middleware/errorMiddleware";
 import reactMiddleware from "./middleware/reactMiddleware";
 import useRouting from "./middleware/routing";
@@ -19,6 +20,8 @@ export default function createServer() {
     const server = express();
 
     server.use(cors(corsOptions));
+
+    server.use(bodyParser.urlencoded({ extended: true }));
 
     server.use(express.static(PUBLIC_DIR_PATH, {
         index: false // The static middleware don't serve index.html. The ssr content won't be serverd otherwise.

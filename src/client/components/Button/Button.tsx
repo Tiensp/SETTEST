@@ -1,5 +1,5 @@
-import React from 'react';
-import { ButtonColor } from '../../constants/enums';
+import React from 'react'
+import { ButtonColor } from '../../constants/enums'
 
 /**
  * @label The label of button.
@@ -7,31 +7,35 @@ import { ButtonColor } from '../../constants/enums';
  * @direction False by default. If isLarger is true, True: Horizontal, False: Vertical.
  */
 type Props = {
-  label: string;
-  color: ButtonColor;
-  isLarger?: boolean;
+	label: string
+	color: ButtonColor
+	isLarger?: boolean
+	onClick: React.MouseEventHandler
 }
 
-export default function Button({ label, color, isLarger }: Props) {
+export default function Button({ label, color, isLarger, onClick }: Props) {
+	const largerButton = isLarger ? ' button--large' : ''
 
-  const largerButton = isLarger ? ' button--large' : '';
+	let buttonColor
+	if (color === ButtonColor.Orange) {
+		buttonColor = ' button--orange'
+	} else if (color === ButtonColor.Brown) {
+		buttonColor = ' button--brown'
+	} else {
+		buttonColor = ''
+	}
 
-  let buttonColor;
-  if (color === ButtonColor.Orange) {
-    buttonColor = ' button--orange';
-  } else if (color === ButtonColor.Brown) {
-    buttonColor = ' button--brown';
-  } else {
-    buttonColor = '';
-  }
-  
-  return (
-      <div className={`button${largerButton}${buttonColor}`}>
-        {label}
-      </div>
-  )
+	return (
+		<button
+			type='button'
+			className={`button${largerButton}${buttonColor}`}
+			onClick={onClick}
+		>
+			{label}
+		</button>
+	)
 }
 
 Button.defaultProps = {
-  isLarger: false
+	isLarger: false,
 }

@@ -1,28 +1,19 @@
-import http from "../apis/http-common";
-import { UserModel } from "../../shared/models/user.model";
+import http from '../apis/http-common'
+import { HistoryModel } from '../../shared/models/history.model'
 
-const getAll = () => http.get("/user");
+const getAll = () => http.get('/history')
 
-const get = (id: any) => http.get<UserModel>(`/user/${id}`);
+const create = (data: HistoryModel) => http.post<HistoryModel>('/history', data)
 
-const create = (data: UserModel) => http.post<UserModel>("/user", data);
+const update = (data: HistoryModel) => http.put<any>(`/history`, data)
 
-const update = (id: any, data: UserModel) => http.put<any>(`/user/${id}`, data);
+const removeAll = () => http.delete<any>(`/history`)
 
-const remove = (id: any) => http.delete<any>(`/user/${id}`);
+const historyService = {
+	getAll,
+	create,
+	update,
+	removeAll,
+}
 
-const removeAll = () => http.delete<any>(`/user`);
-
-const findByName = (name: string) => http.get<Array<UserModel>>(`/user?name=${name}`);
-
-const userService = {
-  getAll,
-  get,
-  create,
-  update,
-  remove,
-  removeAll,
-  findByName,
-};
-
-export default userService;
+export default historyService
