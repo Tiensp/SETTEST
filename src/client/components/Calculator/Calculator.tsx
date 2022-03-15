@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ButtonColor, InputType, OperatorType } from '../../constants/enums'
 import CalculatorLogic, { CalculatorInput } from '../../modules/calculatorLogic'
 import ActionBar from '../ActionBar/ActionBar'
@@ -7,6 +7,7 @@ import Button from '../Button/Button'
 export default function Calculator() {
 	const [ inputs, setInputs ] = useState<Array<CalculatorInput>>([]);
 	const state = CalculatorLogic.getState(inputs);
+	const [ clearLabel, setClearLabel] = useState('AC');
 
 	const appendInput = (input: CalculatorInput): void => {
 		setInputs((prev) => [...prev, input]);
@@ -16,8 +17,29 @@ export default function Calculator() {
 		setInputs((prev) => [...prev, { type: InputType.Numerical, value}])
 	}
 
-	const handleOperator = (operator: OperatorType) => () =>
-		appendInput({type: InputType.Operation, operator});
+	const handleOperator = (operator: OperatorType) => () => {
+		if (inputs.length !== 0) {
+			appendInput({type: InputType.Operation, operator});
+		}
+	}
+
+	const handleClearButton = () => {
+		setInputs([])
+	}
+
+	useEffect(() => {
+		if (inputs.length > 0) {
+			setClearLabel('C')
+		} else {
+			setClearLabel('AC')
+		}
+	}, [inputs])
+
+	useEffect(() => {
+		if (state.isEvaluatedValue) {
+			setInputs([{type: InputType.Numerical, value: state.displayValue}])
+		}
+	}, [state])
 
 	return (
 		<div className='calculator'>
@@ -25,7 +47,7 @@ export default function Calculator() {
 				<ActionBar />
 				<div className='grid'>
 					<div className='display'>{state.displayValue}</div>
-					<Button label='AC' color={ButtonColor.Brown} onClick={handleNumerical(0)} />
+					<Button label={clearLabel} color={ButtonColor.Brown} onClick={handleClearButton} />
 					<Button label='+/-' color={ButtonColor.Brown} onClick={handleOperator(OperatorType.PlusMinus)} />
 					<Button label='%' color={ButtonColor.Brown} onClick={handleOperator(OperatorType.Modulo)} />
 					<Button label='÷' color={ButtonColor.Orange} onClick={handleOperator(OperatorType.Divide)} />

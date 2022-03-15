@@ -34,6 +34,30 @@ describe('Calculator', () => {
 		expect(state.displayValue).toEqual(0)
 	})
 
+    test('derives displayValue upon first numerical input', () => {
+		const inputs: Array<CalculatorInput> = [{ type: InputType.Numerical, value: 1 }]
+
+		const state = CalculatorLogic.getState(inputs)
+		expect(state.displayValue).toEqual(1)
+	})
+
+    test('no change displayValue if press Equals without operator', () => {
+		const inputs: Array<CalculatorInput> = [{ type: InputType.Numerical, value: 1 }]
+
+		const state = CalculatorLogic.getState(inputs)
+		expect(state.displayValue).toEqual(1)
+	})
+
+    test('derives displayValue upon operator input', () => {
+		const inputs: Array<CalculatorInput> = [
+			{ type: InputType.Numerical, value: 1 },
+			{ type: InputType.Numerical, value: 2 },
+			{ type: InputType.Operation, operator: OperatorType.Add },
+		]
+		const state = CalculatorLogic.getState(inputs)
+		expect(state.displayValue).toEqual(12)
+	})
+
 	test('derives displayValue upon new numerical input', () => {
 		const inputs: Array<CalculatorInput> = [
 			{ type: InputType.Numerical, value: 1 },
@@ -75,6 +99,6 @@ describe('Calculator', () => {
 		]
 
 		const state = CalculatorLogic.getState(inputs)
-		expect(state.displayValue).toEqual(4)
+		expect(state.displayValue).toEqual(13)
 	})
 })
