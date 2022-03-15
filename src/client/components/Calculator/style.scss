@@ -24,10 +24,29 @@
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: flex-end;
+}
+
+#display__content {
+	width: -webkit-fill-available;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	text-align: right;
+	margin: 20px;
 
 	font-size: 70px;
 	font-weight: 500;
 	font-family: Arial, Helvetica, sans-serif;
 	color: rgb(235, 235, 235);
-	padding: 20px;
+	overflow: hidden;
+
+	&:focus {
+		border: none;
+		outline: none;
+	}
+
+	&::selection {
+		background-color: rgb(188, 212, 251);
+		color: rgb(8, 9, 10);
+	}
 }

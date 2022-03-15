@@ -1,6 +1,5 @@
 import { Express } from "express";
 import renderReactAsync from "../ssr/renderReactAsync";
-import { UserModel } from "../../shared/models/user.model";
 
 /** Defines the server routings. */
 export default function useRouting(app: Express) {
@@ -19,16 +18,10 @@ export default function useRouting(app: Express) {
   });
 
   // User Page Route
-  app.get("/user", async (req, res) => {
-
-    const model: UserModel = {
-      id: 1000,
-      name: "Ta Quang Tien",
-      age: 10
-    };
+  app.get("/history", async (req, res) => {
 
     try {
-      const html = await renderReactAsync(req.url, model);
+      const html = await renderReactAsync(req.url);
       return res.status(200).contentType("text/html").send(html);
     }
     catch (error) {

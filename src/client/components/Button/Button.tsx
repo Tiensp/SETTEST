@@ -25,7 +25,15 @@ export default function Button({ label, color, isLarger, onClick }: Props) {
 		buttonColor = ''
 	}
 
-	return <button type='button' className={`button${largerButton}${buttonColor}`} onClick={onClick} >{label}</button>
+	return (
+		<button
+			type='button'
+			className={`button${largerButton}${buttonColor}`}
+			onClick={onClick}
+		>
+			{label}
+		</button>
+	)
 }
 
 Button.defaultProps = {

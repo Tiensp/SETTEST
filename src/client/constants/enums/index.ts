@@ -11,7 +11,7 @@ enum ButtonColor {
 
 enum InputType {
 	Numerical,
-	Operation
+	Operation,
 }
 
 enum OperatorType {
@@ -20,8 +20,9 @@ enum OperatorType {
 	Multiply = 'multiply',
 	Divide = 'divide',
 	Modulo = 'modulo',
-	PlusMinus = 'plusminus', 
-	Equals = 'equals'
+	PlusMinus = 'plusminus',
+	Equals = 'equals',
+	Dot = 'dot',
 }
 
 export { ButtonType, ButtonColor, InputType, OperatorType }

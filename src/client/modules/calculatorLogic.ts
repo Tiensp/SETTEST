@@ -1,23 +1,11 @@
 import { InputType, OperatorType } from '../constants/enums'
-
-export type CalculatorInput =
-	| { type: InputType.Numerical; value: number }
-	| { type: InputType.Operation; operator: OperatorType }
-
-export type CalculatorState = {
-	displayValue: number
-	isEvaluatedValue: boolean
-}
-
-export type Operation = {
-	operator: OperatorType
-	value: number
-}
-
-export type OperationsBuilder = {
-	operations: Operation[]
-	working: Operation
-}
+import {
+	CalculatorInput,
+	CalculatorState,
+	Operation,
+	OperationsBuilder,
+} from '../constants/types/calculatorType'
+import saveInputHistory from '../helpers'
 
 const getOperationsBuilder = (
 	inputs: Array<CalculatorInput>
@@ -81,12 +69,12 @@ const getOperationsBuilder = (
 							}
 						}
 
-            case OperatorType.PlusMinus: {
+						case OperatorType.PlusMinus: {
 							return {
 								operations: [
 									...builder.operations,
-                  { ...builder.working, value: builder.working.value * -1 },
-                  { operator: OperatorType.PlusMinus, value: 0 },
+									{ ...builder.working, value: builder.working.value * -1 },
+									{ operator: OperatorType.PlusMinus, value: 0 },
 								],
 								working: { operator: OperatorType.Add, value: 0 },
 							}
@@ -219,6 +207,7 @@ const getState = (inputs: Array<CalculatorInput>): CalculatorState => {
 	const builder = getOperationsBuilder(inputs)
 	const { operations } = builder
 	const inputsHistory = [...operations]
+
 	const lastOperation = inputsHistory.length
 		? inputsHistory[inputsHistory.length - 1]
 		: null
@@ -230,13 +219,14 @@ const getState = (inputs: Array<CalculatorInput>): CalculatorState => {
 	switch (lastOperation.operator) {
 		case OperatorType.Equals: {
 			const result = getResult(operations)
-			return { displayValue: result, isEvaluatedValue: true }
+			const historyData = saveInputHistory(inputsHistory, result)
+			return { displayValue: result, isEvaluatedValue: true, historyData }
 		}
 
 		default: {
-      console.log(builder)
 			const isAddOperator =
-				builder.operations[builder.operations.length - 1].operator === OperatorType.Add
+				builder.operations[builder.operations.length - 1].operator ===
+				OperatorType.Add
 					? 1
 					: 2
 			const displayValue =

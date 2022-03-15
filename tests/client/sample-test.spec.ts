@@ -3,10 +3,8 @@
  */
 import { describe, expect, test } from '@jest/globals'
 import { InputType, OperatorType } from '../../src/client/constants/enums'
-import CalculatorLogic, {
-	CalculatorInput,
-	Operation,
-} from '../../src/client/modules/calculatorLogic'
+import { CalculatorInput, Operation } from '../../src/client/constants/types/calculatorType'
+import CalculatorLogic from '../../src/client/modules/calculatorLogic'
 
 describe('Calculator', () => {
 	test('generates operations', () => {
