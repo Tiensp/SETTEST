@@ -1,5 +1,25 @@
 # SETTEST
 SET TEST 
+==================================================================
+
+1. Install dependencies:
+
+```
+npm install
+```
+
+2. Run app:
+
+```
+npm run start:server
+```
+3. Test app:
+
+```
+npm test
+```
+
+==================================================================
 
 **FRONT END:**
 
